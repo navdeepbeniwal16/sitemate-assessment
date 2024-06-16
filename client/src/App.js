@@ -1,16 +1,20 @@
 import React from "react";
-import "./App.css";
-import IssueForm from "./components/IssueForm";
-import IssueList from "./components/IssueList";
+import Home from "./components/Home.js";
+import NewIssue from "./components/NewIssue.js";
+import EditIssue from "./components/EditIssue.js";
 
-function App() {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+const App = () => {
   return (
-    <div className="App">
-      <h1>Issues Tracker</h1>
-      <IssueForm />
-      <IssueList />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/new" element={<NewIssue />} />
+        <Route path="/edit/:id" element={<EditIssue />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
