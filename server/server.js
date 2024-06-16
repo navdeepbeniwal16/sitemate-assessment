@@ -29,11 +29,8 @@ app.use(cors());
 // Middleware for parsing request bodies
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 // Helper function to find issue by id
-const getIssueById = (id) => {
-  return issues.find((issue) => issue.id === id);
-};
+const getIssueById = (id) => issues.find((issue) => issue.id === id);
 
 // Middleware to check if an issue exists
 const issuePresenceCheck = (req, res, next) => {
@@ -49,6 +46,8 @@ const issuePresenceCheck = (req, res, next) => {
 };
 
 // Routes
+
+// REST endpoint to ping the server app
 app.get("/", (req, res) => {
   res.status(200).send("Issues-Tracker express server is up...");
 });
@@ -129,6 +128,7 @@ app.delete("/issue/:id", issuePresenceCheck, (req, res) => {
 
   // Find index of issue to be deleted, and remove it using splicing
   const issueIndex = issues.findIndex((issue) => issue.id === issueToDel.id);
+
   issues.splice(issueIndex, 1);
 
   console.log("Issue deleted", issueToDel);
