@@ -123,6 +123,22 @@ app.put("/issue/:id", issuePresenceCheck, (req, res) => {
   });
 });
 
+// REST endpoint to delete an issue
+app.delete("/issue/:id", issuePresenceCheck, (req, res) => {
+  const issueToDel = req.issue;
+
+  // Find index of issue to be deleted, and remove it using splicing
+  const issueIndex = issues.findIndex((issue) => issue.id === issueToDel.id);
+  issues.splice(issueIndex, 1);
+
+  console.log("Issue deleted", issueToDel);
+
+  res.status(200).send({
+    message: "Successfully deleted issue",
+    issue: issueToDel,
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Issues-Tracker express server is listening on port: ${PORT}`);
